@@ -116,18 +116,27 @@ cat > file22
 
 cut -c1-3 file11
 ## OUTPUT
-
-
-
+```
+Hel
+Thi
+```
 
 cut -d "|" -f 1 file22
 ## OUTPUT
 
-
+```
+1001
+1002
+1003
+```
 
 cut -d "|" -f 2 file22
 ## OUTPUT
-
+```
+ Ram
+ tom
+ Joe
+```
 
 cat < newfile 
 ```
@@ -141,29 +150,36 @@ hello world
  
 grep Hello newfile 
 ## OUTPUT
-
-
+```
+Hello world
+```
 
 grep hello newfile 
 ## OUTPUT
-
-
-
-
+```
+hello world
+```
 grep -v hello newfile 
 ## OUTPUT
-
+```
+Hello world
+```
 
 
 cat newfile | grep -i "hello"
 ## OUTPUT
 
-
+```
+Hello world
+hello world
+```
 
 
 cat newfile | grep -i -c "hello"
 ## OUTPUT
-
+```
+2
+```
 
 
 
