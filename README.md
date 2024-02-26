@@ -42,9 +42,12 @@ s.n. dasgupta
 ### Display the content of the files
 cat < file1
 ## OUTPUT
-
 ```
 chanchal singhvi
+c.k. shukla
+s.n. dasgupta
+sumit chakrobarty
+^dchanchal singhvi
 c.k. shukla
 s.n. dasgupta
 sumit chakrobarty
@@ -65,36 +68,44 @@ cmp file1 file2
 ## OUTPUT
 ```
 file1 file2 differ: char 1, line 1
-```
 comm file1 file2
+```
  ## OUTPUT
 ```
 anil aggarwal
-barun sengupta
+ barun sengupta
+ c.k. shukla
+chanchal singhvi
 c.k. shukla
-chancal singhvi
+ lalit chowdury
+   s.n. dasgupta
+sumit chakrobarty
+chanchal singhvi
 c.k. shukla
-lalit chowdury
 s.n. dasgupta
-
+sumit chakrobarty
 ```
+
  
 diff file1 file2
 ## OUTPUT
 ```
 --- file1
 +++ file2
-@@ -1,4 +1,5 @@
--chancal singhvi
+@@ -1,10 +1,6 @@
+-
+-chanchal singhvi
 +anil aggarwal
 +barun sengupta
  c.k. shukla
 +lalit chowdury
  s.n. dasgupta
 -sumit chakrobarty
-
+-^dchanchal singhvi
+-c.k. shukla
+-s.n. dasgupta
+-sumit chakrobarty
 ```
-
 #Filters
 
 ### Create the following files file11, file22 as follows:
@@ -123,7 +134,6 @@ Thi
 
 cut -d "|" -f 1 file22
 ## OUTPUT
-
 ```
 1001
 1002
@@ -133,12 +143,11 @@ cut -d "|" -f 1 file22
 cut -d "|" -f 2 file22
 ## OUTPUT
 ```
- Ram
+Ram
  tom
  Joe
 ```
-
-cat < newfile 
+cat > newfile 
 ```
 Hello world
 hello world
@@ -159,21 +168,20 @@ grep hello newfile
 ```
 hello world
 ```
+
+
 grep -v hello newfile 
 ## OUTPUT
 ```
 Hello world
 ```
 
-
 cat newfile | grep -i "hello"
 ## OUTPUT
-
 ```
 Hello world
 hello world
 ```
-
 
 cat newfile | grep -i -c "hello"
 ## OUTPUT
@@ -181,18 +189,40 @@ cat newfile | grep -i -c "hello"
 2
 ```
 
-
-
 grep -R ubuntu /etc
 ## OUTPUT
-
-
+```
+Search for PATTERN in FILEs (or stdin)
+ 
+        -H      Add 'filename:' prefix
+        -h      Do not add 'filename:' prefix
+        -n      Add 'line_no:' prefix
+        -l      Show only names of files that match
+        -L      Show only names of files that don't match
+        -c      Show only count of matching lines
+        -o      Show only the matching part of line
+        -q      Quiet. Return 0 if PATTERN is found, 1 otherwise
+        -v      Select non-matching lines
+        -s      Suppress open and read errors
+        -r      Recurse
+        -i      Ignore case
+        -w      Match whole words only
+        -x      Match whole lines only
+        -F      PATTERN is a literal (not regexp)
+        -E      PATTERN is an extended regexp
+        -m N    Match up to N times per file
+        -A N    Print N lines of trailing context
+        -B N    Print N lines of leading context
+```
 
 grep -w -n world newfile   
 ## OUTPUT
+```
+1:Hello world
+2:hello world
+```
 
-
-cat < newfile 
+cat > newfile 
 ```
 Hello world
 hello world
@@ -206,68 +236,91 @@ cat > newfile
 ```
 Hello world
 hello world
-Linux is world number 1
+Linux is world number 
 Unix is predecessor
 Linux is best in this World
 ^d
  ```
 egrep -w 'Hello|hello' newfile 
 ## OUTPUT
-
-
+```
+Hello world
+hello world
+```
 
 egrep -w '(H|h)ello' newfile 
 ## OUTPUT
-
-
+```
+Hello world
+hello world
+```
 
 egrep -w '(H|h)ell[a-z]' newfile 
 ## OUTPUT
-
-
+```
+Hello world
+hello world
+```
 
 
 egrep '(^hello)' newfile 
 ## OUTPUT
-
-
+```
+hello world
+```
 
 egrep '(world$)' newfile 
 ## OUTPUT
-
-
+```
+Hello world
+hello world
+```
 
 egrep '(World$)' newfile 
 ## OUTPUT
-
+```
+Linux is best in this world
+```
 
 egrep '((W|w)orld$)' newfile 
 ## OUTPUT
-
-
+```
+Hello world
+hello world
+Linux is best in this World
+```
 
 egrep '[1-9]' newfile 
 ## OUTPUT
-
-
+```
+Linux is world number 1
+```
 
 egrep 'Linux.*world' newfile 
 ## OUTPUT
-
-
+```
+Linux is world number 1
+```
 egrep 'Linux.*World' newfile 
 ## OUTPUT
-
+```
+Linux is best in this World
+```
 
 egrep l{2} newfile
 ## OUTPUT
-
-
+```
+Hello world
+hello world
+```
 
 egrep 's{1,2}' newfile
 ## OUTPUT 
-
-
+```
+Linux is world number 1
+Unix is predecessor
+Linux is best in this World
+```
 cat > file23
 ```
 1001 | Ram | 10000 | HR
@@ -284,7 +337,6 @@ cat > file23
 
 sed -n -e '3p' file23
 ## OUTPUT
-
 ```
 1002 | tom |  5000 | Admin
 ```
@@ -294,9 +346,9 @@ sed -n -e '$p' file23
 ```
 1001 | Ram | 10000 | HR
 ```
+
 sed  -e 's/Ram/Sita/' file23
 ## OUTPUT
-
 ```
 1001 | Sita | 10000 | HR
 1001 | Sita | 10000 | HR
@@ -321,7 +373,6 @@ sed  -e '2s/Ram/Sita/' file23
 1001 | Ram | 10000 | HR
 ```
 
-
 sed  '/tom/s/5000/6000/' file23
 ## OUTPUT
 ```
@@ -334,7 +385,6 @@ sed  '/tom/s/5000/6000/' file23
 1003 | Joe |  7000 | Developer
 1001 | Ram | 10000 | HR
 ```
-
 
 sed -n -e '1,5p' file23
 ## OUTPUT
@@ -353,12 +403,15 @@ sed -n -e '2,/Joe/p' file23
 1002 | tom |  5000 | Admin
 1003 | Joe |  7000 | Developer
 ```
+
+
 sed -n -e '/tom/,/Joe/p' file23
 ## OUTPUT
 ```
 1002 | tom |  5000 | Admin
 1003 | Joe |  7000 | Developer
 ```
+
 seq 10 
 ## OUTPUT
 ```
@@ -373,6 +426,7 @@ seq 10
 9
 10
 ```
+
 seq 10 | sed -n '4,6p'
 ## OUTPUT
 ```
@@ -380,13 +434,15 @@ seq 10 | sed -n '4,6p'
 5
 6
 ```
-seq 10 | sed -n '2,~4p'
+
+seq 10 | sed -n '2,4p'
 ## OUTPUT
 ```
 2
-6
-10
+3
+4
 ```
+
 seq 3 | sed '2a hello'
 ## OUTPUT
 ```
@@ -395,6 +451,7 @@ seq 3 | sed '2a hello'
 hello
 3
 ```
+
 seq 2 | sed '2i hello'
 ## OUTPUT
 ```
@@ -402,6 +459,7 @@ seq 2 | sed '2i hello'
 hello
 2
 ```
+
 seq 10 | sed '2,9c hello'
 ## OUTPUT
 ```
@@ -412,17 +470,20 @@ hello
 sed -n '2,4{s/^/$/;p}' file23
 ## OUTPUT
 ```
-1001 | Ram | 10000 | HR
+$1001 | Ram | 10000 | HR
+$1002 | tom |  5000 | Admin
+$1003 | Joe |  7000 | Developer
+```
+
+sed -n '2,4{s/$/*/;p}' file23
+## OUTPUT
+```
 1001 | Ram | 10000 | HR
 1002 | tom |  5000 | Admin
+1003 | Joe |  7000 | Developer
 ```
-sed -n '2,4{s/$/*/;p}' file23
-```
-1001 | Ram | 10000 | HR*
-1001 | Ram | 10000 | HR*
-1002 | tom |  5000 | Admin*
-```
-# Sorting File content
+
+#Sorting File content
 cat > file21
 ```
 1001 | Ram | 10000 | HR
@@ -438,7 +499,7 @@ sort file21
 1002 | tom |  5000 | Admin
 1003 | Joe |  7000 | Developer
 1004 | Sit |  7000 | Dev
-1005 | Sam |  5000 | HR
+1005 | Sam |  5000 | HR
 ```
 
 cat > file22
@@ -460,20 +521,11 @@ uniq file22
 1004 | Sit |  7000 | Dev
 ```
 
-# Using tr command
+#Using tr command
 
 cat file23 | tr [:lower:] [:upper:]
  ## OUTPUT
-```
-1001 | RAM | 10000 | HR
-1001 | RAM | 10000 | HR
-1002 | TOM |  5000 | ADMIN
-1003 | JOE |  7000 | DEVELOPER
-1005 | SAM |  5000 | HR
-1004 | SIT |  7000 | DEV
-1003 | JOE |  7000 | DEVELOPER
-1001 | RAM | 10000 | HR
-```
+
 cat < urllist.txt
 ```
 www. yahoo. com
@@ -489,22 +541,33 @@ www. mrcet.... com
  ```
 cat urllist.txt | tr -d ' '
  ## OUTPUT
+ ```
+1001 | RAM | 10000 | HR
+1001 | RAM | 10000 | HR
+1002 | TOM |  5000 | ADMIN
+1003 | JOE |  7000 | DEVELOPER
+1005 | SAM |  5000 | HR
+1004 | SIT |  7000 | DEV
+1003 | JOE |  7000 | DEVELOPER
+1001 | RAM | 10000 | HR
+```
+ 
+cat urllist.txt | tr -d ' ' | tr -s '.'
+## OUTPUT
 ```
 www.yahoo.com
 www.google.com
 www.mrcet....com
 ```
-cat urllist.txt | tr -d ' ' | tr -s '.'
+
+#Backup commands
+tar -cvf backup.tar *
 ## OUTPUT
 ```
 www.yahoo.com
 www.google.com
 www.mrcet.com
 ```
-# Backup commands
-tar -cvf backup.tar *
-## OUTPUT
-
 
 mkdir backupdir
  
@@ -513,25 +576,20 @@ mv backup.tar backupdir
 tar -tvf backup.tar
 ## OUTPUT
 ```
-./
-./file1
-./file2
-./directory1/
-./directory1/file3
-./directory2/
-./directory2/file4
-...
+bench.py
+file21
+file22
+file23
+hello.c
+hello.js
+newfile
+readme.txt
+urllist.txt
 ```
+
 tar -xvf backup.tar
 ## OUTPUT
-```
-file1
-file2
-directory1/
-directory1/file3
-directory2/
-directory2/file4
-```
+
 gzip backup.tar
 
 ls .gz
@@ -549,12 +607,8 @@ echo 'echo Hello World‘; exit 0 >> my-script.sh
 chmod 755 my-script.sh
 ./my-script.sh
 ## OUTPUT
-```
-echo Hello World
-exit 0
-$ ./my-script.sh
-Hello World
-```
+
+ 
 cat << stop > herecheck.txt
 ```
 hello in this world
@@ -565,11 +619,8 @@ stop
 
 cat herecheck.txt
 ## OUTPUT
-```
-hello in this world
-i cant stop
-for this non stop movement
-```
+
+
 cat < scriptest.sh 
 ```bash
 \#!/bin/sh
@@ -606,24 +657,11 @@ chmod 777 scriptest.sh
 ./scriptest.sh 1 2 3
 
 ## OUTPUT
-```
-File name is ./scriptest.sh
-File name is scriptest.sh
-First arg. is 1
-Second arg. is 2
-Third arg. is 3
-Fourth arg. is 
-The $@ is 1 2 3
-The $# is 3
-The $$ is <process ID>
-  PID TTY          TIME CMD
-<list of processes>
-``` 
+
+ 
 ls file1
 ## OUTPUT
-```
 
-```
 echo $?
 ## OUTPUT 
 ./one
@@ -1166,10 +1204,13 @@ cat argshift.sh
 done
 ```
 $ chmod 777 argshift.sh
-
-## OUTPUT
 $ ./argshift.sh 1 2 3
- 
+## OUTPUT
+```
+1
+2
+3
+```
  cat argshift1.sh
 ```bash
  #/bin/bash 
@@ -1184,9 +1225,13 @@ for (( i=0;i<$ELEMENTS;i++)); do
 done
 ```
 $ chmod 777 argshift.sh
-## OUTPUT
 $ ./argshift.sh 1 2 3
- 
+## OUTPUT
+```
+1
+2
+3
+``` 
 cat argshift.sh
 ```bash
 #!/bin/bash 
@@ -1197,10 +1242,24 @@ while (( "$#" )); do
 done
 set +x
 ```
+./argshift.sh 1 2 3
 ## OUTPUT
- ./argshift.sh 1 2 3
- 
- 
+```
++ (( $# ))
++ echo 1
+1
++ shift
++ (( $# ))
++ echo 2
+2
++ shift
++ (( $# ))
++ echo 3
+3
++ shift
++ (( $# ))
++ set +x
+```
 cat > nc.awk
 ```bash
 BEGIN{}
@@ -1230,7 +1289,21 @@ ubcdfghj
 ```
 awk -f nc.awk data.dat
 ## OUTPUT 
- 
+```
+7       bcdfghj
+8       abcdfghj
+7       bcdfghj
+8       ebcdfghj
+7       bcdfghj
+8       ibcdfghj
+7       bcdfghj
+8       obcdfghj
+7       bcdfghj
+8       ubcdfghj
+total characters 76
+Number of Lines are 10
+No of Words count: 20
+```
 cat > palindrome.sh
 ```bash
 #num=545
@@ -1257,7 +1330,10 @@ else
 fi
 ```
 ## OUTPUT 
-
-
+```
+Enter the number
+545
+Number is palindrome
+```
 # RESULT:
 The Commands are executed successfully.
