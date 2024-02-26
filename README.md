@@ -389,30 +389,46 @@ seq 10 | sed -n '4,6p'
 ```
 seq 10 | sed -n '2,~4p'
 ## OUTPUT
-
-
-
+```
+2
+6
+10
+```
 seq 3 | sed '2a hello'
 ## OUTPUT
-
-
-
+```
+1
+2
+hello
+3
+```
 seq 2 | sed '2i hello'
 ## OUTPUT
-
-
+```
+1
+hello
+2
+```
 seq 10 | sed '2,9c hello'
 ## OUTPUT
-
-
+```
+1
+hello
+10
+```
 sed -n '2,4{s/^/$/;p}' file23
 ## OUTPUT
-
-
-
+```
+1001 | Ram | 10000 | HR
+1001 | Ram | 10000 | HR
+1002 | tom |  5000 | Admin
+```
 sed -n '2,4{s/$/*/;p}' file23
-
-
+```
+1001 | Ram | 10000 | HR*
+1001 | Ram | 10000 | HR*
+1002 | tom |  5000 | Admin*
+```
 #Sorting File content
 cat > file21
 ```
