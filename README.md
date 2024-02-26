@@ -292,10 +292,8 @@ sed -n -e '3p' file23
 sed -n -e '$p' file23
 ## OUTPUT
 ```
-^d
+1001 | Ram | 10000 | HR
 ```
-
-
 sed  -e 's/Ram/Sita/' file23
 ## OUTPUT
 
@@ -355,17 +353,12 @@ sed -n -e '2,/Joe/p' file23
 1002 | tom |  5000 | Admin
 1003 | Joe |  7000 | Developer
 ```
-
-
-
 sed -n -e '/tom/,/Joe/p' file23
 ## OUTPUT
 ```
 1002 | tom |  5000 | Admin
 1003 | Joe |  7000 | Developer
 ```
-
-
 seq 10 
 ## OUTPUT
 ```
@@ -429,7 +422,7 @@ sed -n '2,4{s/$/*/;p}' file23
 1001 | Ram | 10000 | HR*
 1002 | tom |  5000 | Admin*
 ```
-#Sorting File content
+# Sorting File content
 cat > file21
 ```
 1001 | Ram | 10000 | HR
@@ -440,7 +433,13 @@ cat > file21
 ``` 
 sort file21
 ## OUTPUT
-
+```
+1001 | Ram | 10000 | HR
+1002 | tom |  5000 | Admin
+1003 | Joe |  7000 | Developer
+1004 | Sit |  7000 | Dev
+1005 | Sam |  5000 | HR
+```
 
 cat > file22
 ```
@@ -453,14 +452,28 @@ cat > file22
 ``` 
 uniq file22
 ## OUTPUT
+```
+1001 | Ram | 10000 | HR
+1002 | tom |  5000 | Admin
+1003 | Joe |  7000 | Developer
+1005 | Sam |  5000 | HR
+1004 | Sit |  7000 | Dev
+```
 
-
-
-#Using tr command
+# Using tr command
 
 cat file23 | tr [:lower:] [:upper:]
  ## OUTPUT
-
+```
+1001 | RAM | 10000 | HR
+1001 | RAM | 10000 | HR
+1002 | TOM |  5000 | ADMIN
+1003 | JOE |  7000 | DEVELOPER
+1005 | SAM |  5000 | HR
+1004 | SIT |  7000 | DEV
+1003 | JOE |  7000 | DEVELOPER
+1001 | RAM | 10000 | HR
+```
 cat < urllist.txt
 ```
 www. yahoo. com
@@ -476,15 +489,19 @@ www. mrcet.... com
  ```
 cat urllist.txt | tr -d ' '
  ## OUTPUT
-
-
- 
+```
+www.yahoo.com
+www.google.com
+www.mrcet....com
+```
 cat urllist.txt | tr -d ' ' | tr -s '.'
 ## OUTPUT
-
-
-
-#Backup commands
+```
+www.yahoo.com
+www.google.com
+www.mrcet.com
+```
+# Backup commands
 tar -cvf backup.tar *
 ## OUTPUT
 
@@ -495,11 +512,26 @@ mv backup.tar backupdir
  
 tar -tvf backup.tar
 ## OUTPUT
-
-
+```
+./
+./file1
+./file2
+./directory1/
+./directory1/file3
+./directory2/
+./directory2/file4
+...
+```
 tar -xvf backup.tar
 ## OUTPUT
-
+```
+file1
+file2
+directory1/
+directory1/file3
+directory2/
+directory2/file4
+```
 gzip backup.tar
 
 ls .gz
@@ -517,8 +549,12 @@ echo 'echo Hello World‘; exit 0 >> my-script.sh
 chmod 755 my-script.sh
 ./my-script.sh
 ## OUTPUT
-
- 
+```
+echo Hello World
+exit 0
+$ ./my-script.sh
+Hello World
+```
 cat << stop > herecheck.txt
 ```
 hello in this world
@@ -529,8 +565,11 @@ stop
 
 cat herecheck.txt
 ## OUTPUT
-
-
+```
+hello in this world
+i cant stop
+for this non stop movement
+```
 cat < scriptest.sh 
 ```bash
 \#!/bin/sh
@@ -567,11 +606,24 @@ chmod 777 scriptest.sh
 ./scriptest.sh 1 2 3
 
 ## OUTPUT
-
- 
+```
+File name is ./scriptest.sh
+File name is scriptest.sh
+First arg. is 1
+Second arg. is 2
+Third arg. is 3
+Fourth arg. is 
+The $@ is 1 2 3
+The $# is 3
+The $$ is <process ID>
+  PID TTY          TIME CMD
+<list of processes>
+``` 
 ls file1
 ## OUTPUT
+```
 
+```
 echo $?
 ## OUTPUT 
 ./one
